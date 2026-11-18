@@ -6,7 +6,7 @@ import { setupNotifications, scheduleRamautReminders, beep, webNotify, askWebNot
 /* ===================== TRADUCTIONS (interface uniquement) ===================== */
 var T = {
  fr:{title:"Inventaire",order:"Commande",history:"Historique",search:"Rechercher un article ou une référence",
-  prio:"★ Priorité",cart:"🛒 Dans la commande",all:"Tout",edit:"✎ Modifier",done:"✓ Terminer",
+  prio:"★ Priorité",cart:"🛒 Dans la commande",all:"Tout",edit:"✏️ Modifier",done:"✓ Terminer",
   editBar:"Mode modification : touche un article pour le modifier ou le supprimer.",addItem:"+ Ajouter un article",
   seeOrder:"Voir la commande",items1:"article",itemsN:"articles",
   to:"Destinataire",subject:"Objet",message:"Message",copy:"Copier",close:"Fermer",markSent:"Commande envoyée ✓",
@@ -24,7 +24,7 @@ var T = {
   allSup:"Tous",today:"Aujourd'hui",yesterday:"Hier",sent:"Envoyée",sentAt:"envoyée à",nth:"n°",sentDone:"Commande envoyée et enregistrée dans l'historique",alreadyToday:"Déjà {n} commande(s) envoyée(s) aujourd'hui chez {s}. Celle-ci sera un complément (n°{m}).",frozen:"Commande envoyée : elle n'est plus modifiable.",complement:"complément",
   noHistory:"Aucune commande pour l'instant.",noHistoryDay:"Aucune commande envoyée ce jour-là.",pickDate:"Choisir une date",allDates:"Toutes les dates",logout:"Se déconnecter",confirmLogout:"Êtes-vous sûr de vouloir vous déconnecter ? Il faudra ressaisir l'e-mail et le mot de passe du shop pour revenir.",yesLogout:"Oui, me déconnecter",notifOff:"⚠️ Les notifications sont bloquées : les rappels Ramaut ne pourront pas sonner. Active-les dans Réglages Android → Applications → Inventaire → Notifications.",loginTitle:"Connexion du shop",email:"E-mail du compte du shop",password:"Mot de passe",signIn:"Se connecter",badLogin:"E-mail ou mot de passe incorrect.",noConfig:"Configuration Firebase manquante : remplis le fichier src/firebase-config.js (voir le guide d'installation).",seeding:"Premier démarrage : chargement des 215 articles…",removed:"(article supprimé)",orderOf:"Commande du",searchIn:"Résultats chez"},
  en:{title:"Inventory",order:"Order",history:"History",search:"Search an item or a reference",
-  prio:"★ Priority",cart:"🛒 In the order",all:"All",edit:"✎ Edit",done:"✓ Done",
+  prio:"★ Priority",cart:"🛒 In the order",all:"All",edit:"✏️ Edit",done:"✓ Done",
   editBar:"Edit mode: tap an item to edit or delete it.",addItem:"+ Add an item",
   seeOrder:"See the order",items1:"item",itemsN:"items",
   to:"To",subject:"Subject",message:"Message",copy:"Copy",close:"Close",markSent:"Order sent ✓",
@@ -174,7 +174,7 @@ function tileHtml(it){
   return '<div class="tile'+(q>0?" in":"")+'" data-id="'+esc(it.id)+'" data-act="tile">'+
     '<div class="nm">'+(it.prio?'<span class="st">★</span>':"")+esc(it.name)+'</div>'+
     '<div class="note">'+esc(it.note||"")+'</div>'+
-    '<div class="edithint">✎ '+esc(t("editItem"))+'</div>'+
+    '<div class="edithint">✏️ '+esc(t("editItem"))+'</div>'+
     '<div class="ctrl"><button class="qb" data-act="dec" aria-label="−">−</button>'+
       '<button class="qv" data-act="qty"><span class="v">'+fmtNum(q)+'</span><span class="u">'+esc(unitName(it.unit))+'</span></button>'+
       '<button class="qb plus" data-act="inc" aria-label="+">+</button></div>'+
