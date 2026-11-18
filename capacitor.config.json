@@ -1,0 +1,9 @@
+{
+  "appId": "be.texascoffeehouse.inventaire",
+  "appName": "Inventaire",
+  "webDir": "dist",
+  "android": { "backgroundColor": "#3b2418" },
+  "plugins": {
+    "LocalNotifications": { "smallIcon": "ic_stat_notify", "iconColor": "#d9822b" }
+  }
+}

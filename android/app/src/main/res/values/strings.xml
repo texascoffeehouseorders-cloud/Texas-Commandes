@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Inventaire</string>
+    <string name="title_activity_main">Inventaire</string>
+    <string name="package_name">be.texascoffeehouse.inventaire</string>
+    <string name="custom_url_scheme">be.texascoffeehouse.inventaire</string>
+</resources>

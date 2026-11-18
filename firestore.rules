@@ -1,0 +1,18 @@
+rules_version = '2';
+// Seules les personnes connectées avec le compte du shop peuvent lire et écrire.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+
+    match /items/{id}    { allow read, write: if signedIn(); }   // articles
+    match /drafts/{id}   { allow read, write: if signedIn(); }   // commandes en cours
+    match /settings/{id} { allow read, write: if signedIn(); }   // adresse e-mail Ramaut
+    match /meta/{id}     { allow read, write: if signedIn(); }   // premier démarrage
+
+    // Historique des commandes envoyées : on peut l'ajouter et le lire, jamais le modifier ni le supprimer.
+    match /history/{id} {
+      allow read, create: if signedIn();
+      allow update, delete: if false;
+    }
+  }
+}
