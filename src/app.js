@@ -22,7 +22,7 @@ var T = {
   emailPh:"adresse e-mail de Ramaut",nameReq:"Le nom est obligatoire.",badNum:"Nombre invalide.",saved:"Enregistré",deleted:"Article supprimé",
   writeErr:"Échec de l'enregistrement. Réessayez.",noRight:"Pas d'autorisation pour modifier.",
   allSup:"Tous",today:"Aujourd'hui",yesterday:"Hier",sent:"Envoyée",sentAt:"envoyée à",nth:"n°",sentDone:"Commande envoyée et enregistrée dans l'historique",alreadyToday:"Déjà {n} commande(s) envoyée(s) aujourd'hui chez {s}. Celle-ci sera un complément (n°{m}).",frozen:"Commande envoyée : elle n'est plus modifiable.",complement:"complément",
-  noHistory:"Aucune commande pour l'instant.",noHistoryDay:"Aucune commande envoyée ce jour-là.",pickDate:"Choisir une date",allDates:"Toutes les dates",logout:"Se déconnecter",notifOff:"⚠️ Les notifications sont bloquées : les rappels Ramaut ne pourront pas sonner. Active-les dans Réglages Android → Applications → Inventaire → Notifications.",loginTitle:"Connexion du shop",email:"E-mail du compte du shop",password:"Mot de passe",signIn:"Se connecter",badLogin:"E-mail ou mot de passe incorrect.",noConfig:"Configuration Firebase manquante : remplis le fichier src/firebase-config.js (voir le guide d'installation).",seeding:"Premier démarrage : chargement des 215 articles…",removed:"(article supprimé)",orderOf:"Commande du",searchIn:"Résultats chez"},
+  noHistory:"Aucune commande pour l'instant.",noHistoryDay:"Aucune commande envoyée ce jour-là.",pickDate:"Choisir une date",allDates:"Toutes les dates",logout:"Se déconnecter",confirmLogout:"Êtes-vous sûr de vouloir vous déconnecter ? Il faudra ressaisir l'e-mail et le mot de passe du shop pour revenir.",yesLogout:"Oui, me déconnecter",notifOff:"⚠️ Les notifications sont bloquées : les rappels Ramaut ne pourront pas sonner. Active-les dans Réglages Android → Applications → Inventaire → Notifications.",loginTitle:"Connexion du shop",email:"E-mail du compte du shop",password:"Mot de passe",signIn:"Se connecter",badLogin:"E-mail ou mot de passe incorrect.",noConfig:"Configuration Firebase manquante : remplis le fichier src/firebase-config.js (voir le guide d'installation).",seeding:"Premier démarrage : chargement des 215 articles…",removed:"(article supprimé)",orderOf:"Commande du",searchIn:"Résultats chez"},
  en:{title:"Inventory",order:"Order",history:"History",search:"Search an item or a reference",
   prio:"★ Priority",cart:"🛒 In the order",all:"All",edit:"✎ Edit",done:"✓ Done",
   editBar:"Edit mode: tap an item to edit or delete it.",addItem:"+ Add an item",
@@ -40,7 +40,7 @@ var T = {
   emailPh:"Ramaut e-mail address",nameReq:"Name is required.",badNum:"Invalid number.",saved:"Saved",deleted:"Item deleted",
   writeErr:"Saving failed. Please try again.",noRight:"No permission to make changes.",
   allSup:"All",today:"Today",yesterday:"Yesterday",sent:"Sent",sentAt:"sent at",nth:"#",sentDone:"Order sent and saved in the history",alreadyToday:"{n} order(s) already sent today to {s}. This one will be an extra order (#{m}).",frozen:"Sent order: it can no longer be changed.",complement:"extra",
-  noHistory:"No orders yet.",noHistoryDay:"No order sent on that day.",pickDate:"Pick a date",allDates:"All dates",logout:"Sign out",notifOff:"⚠️ Notifications are blocked: Ramaut reminders cannot ring. Turn them on in Android Settings → Apps → Inventaire → Notifications.",loginTitle:"Shop sign-in",email:"Shop account e-mail",password:"Password",signIn:"Sign in",badLogin:"Wrong e-mail or password.",noConfig:"Firebase configuration missing: fill in src/firebase-config.js (see the installation guide).",seeding:"First start: loading the 215 items…",removed:"(deleted item)",orderOf:"Order of",searchIn:"Results at"}
+  noHistory:"No orders yet.",noHistoryDay:"No order sent on that day.",pickDate:"Pick a date",allDates:"All dates",logout:"Sign out",confirmLogout:"Are you sure you want to sign out? You will need the shop e-mail and password to sign back in.",yesLogout:"Yes, sign out",notifOff:"⚠️ Notifications are blocked: Ramaut reminders cannot ring. Turn them on in Android Settings → Apps → Inventaire → Notifications.",loginTitle:"Shop sign-in",email:"Shop account e-mail",password:"Password",signIn:"Sign in",badLogin:"Wrong e-mail or password.",noConfig:"Firebase configuration missing: fill in src/firebase-config.js (see the installation guide).",seeding:"First start: loading the 215 items…",removed:"(deleted item)",orderOf:"Order of",searchIn:"Results at"}
 };
 
 /* ===================== ÉTAT ===================== */
@@ -84,6 +84,7 @@ function renderChrome(){
   document.documentElement.lang=S.lang;
   document.body.classList.toggle("editing",S.edit && S.view==="order");
   $("tTitle").textContent=t("title");
+  $("logoutBtn").title=t("logout"); $("logoutBtn").setAttribute("aria-label",t("logout"));
   $("langBtn").innerHTML = S.lang==="fr" ? "<b>FR</b> / EN" : "FR / <b>EN</b>";
   $("editBtn").textContent = S.edit ? t("done") : t("edit");
   $("editBtn").classList.toggle("editon",S.edit);
@@ -221,7 +222,6 @@ function renderHistory(){
     html+='<button class="hcard" data-act="hopen" data-o="'+esc(h._id)+'"><div class="grow"><div class="who">'+esc(supName(h.supplier))+(h.nth>1?' · '+esc(t("nth"))+h.nth:"")+' · '+esc(nItems(ls.length))+'</div><div class="sum">'+esc(sumTxt)+'</div></div>'+
       '<span class="tag sent">✓ '+esc(t("sentAt"))+' '+hTime(h)+'</span></button>';
   });
-  html+='<div style="text-align:center;margin-top:30px"><button class="btn sec" data-act="logout">'+esc(t("logout"))+'</button></div>';
   m.innerHTML=html;
 }
 
@@ -390,6 +390,12 @@ function historyDialog(hid){
   messageDialog({title:supName(h.supplier)+(h.nth>1?" "+t("nth")+h.nth:"")+" · "+dayLabel(h.date)+" · "+hTime(h), sup:h.supplier, subject:h.subject||"", msg:h.msg||"", to:h.to||"", live:false, frozen:true});
 }
 
+function logoutDialog(){
+  openDlg('<div class="dlg sm" role="dialog"><div class="dh">'+esc(t("logout"))+'</div><div class="db"><p style="margin:0;font-weight:700">'+esc(t("confirmLogout"))+'</p></div>'+
+    '<div class="df"><button class="btn sec" data-act="close">'+esc(t("cancel"))+'</button><button class="btn danger" id="doLogout">'+esc(t("yesLogout"))+'</button></div></div>');
+  $("doLogout").onclick=function(){ this.disabled=true; flushAll(); logout().then(function(){ location.reload(); }).catch(function(){ location.reload(); }); };
+}
+
 /* ===================== ÉVÉNEMENTS ===================== */
 document.addEventListener("click",function(e){
   var el=e.target.closest("[data-act]"); if(!el) return;
@@ -403,7 +409,7 @@ document.addEventListener("click",function(e){
     case "cat": S.catBySup[S.sup]=el.dataset.k; lsSet("catBySup",S.catBySup); if(S.search){ S.search=""; $("q").value=""; $("qClr").classList.add("hidden"); } renderOrderBody(); if(window.innerWidth<900) window.scrollTo({top:0}); break;
     case "hsup": S.hSup=el.dataset.s; renderHistory(); break;
     case "hdateclear": setHistoryDate(""); break;
-    case "logout": flushAll(); logout().then(function(){ location.reload(); }).catch(function(){}); break;
+    case "logout": logoutDialog(); break;
     case "hopen": historyDialog(el.dataset.o); break;
     case "add": itemForm(null); break;
     case "preview": previewDialog(); break;

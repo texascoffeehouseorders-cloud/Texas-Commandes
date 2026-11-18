@@ -157,3 +157,5 @@ body.editing .tile .edithint{display:block}
 .datebox input{border:0;font-size:17px;font-weight:800;background:transparent;min-height:40px;color:var(--coffee)}
 .datebox input:focus{outline:none}
 .hdate .cat{width:auto!important;border-radius:999px!important}
+
+.hbtn.icon{width:46px;padding:0;font-size:20px;line-height:1}
