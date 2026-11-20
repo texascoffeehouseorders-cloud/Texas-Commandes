@@ -69,3 +69,28 @@ npm run android:sync   # met à jour le projet Android (dossier android/)
 ```
 Le projet Android se compile avec Android Studio ou `cd android && ./gradlew assembleRelease`.
 La clé de signature `android/app/tch-release.jks` doit rester la même pour que les mises à jour s'installent par-dessus.
+
+---
+
+## Envoi automatique des commandes Ramaut (1 clic, gratuit)
+
+Un petit script Google, hébergé gratuitement dans le compte Google du shop, envoie l'e-mail depuis la Gmail du shop.
+Limite Google : 100 destinataires par jour (largement suffisant).
+
+1. Connecte-toi à **https://script.google.com** avec le **compte Google du shop** (celui de la Gmail qui doit envoyer).
+2. **Nouveau projet** → nomme-le `Envoi commandes Texas`.
+3. Efface tout le contenu de `Code.gs` et colle le contenu du fichier `apps-script/Code.gs` de ce dépôt.
+4. Ligne `const SECRET = 'COLLE-ICI-TON-CODE-SECRET';` : remplace le texte entre apostrophes par **ton code secret** (ne le mets jamais dans GitHub). Enregistre (💾).
+5. En haut, choisis la fonction **autoriser** puis **▶ Exécuter** → **Examiner les autorisations** → choisis le compte du shop.
+   Google affiche « Google n'a pas validé cette application » : c'est normal (c'est ton propre script) → **Paramètres avancés** → **Accéder à Envoi commandes Texas** → **Autoriser**.
+6. **Déployer → Nouveau déploiement** → roue ⚙️ → **Application Web**
+   - Exécuter en tant que : **Moi**
+   - Qui a accès : **Tout le monde**
+   → **Déployer** → copie l'**URL de l'application Web** (elle finit par `/exec`).
+7. Dans l'application Inventaire : **Commande → Ramaut → Voir la commande → ⚙️ Configurer l'envoi automatique**
+   → colle l'URL et le code secret → **Envoyer un e-mail de test** (un e-mail arrive dans la Gmail du shop) → **Enregistrer**.
+
+Ensuite, le bouton **📧 Envoyer à Ramaut** envoie l'e-mail et enregistre la commande dans l'historique en un seul clic.
+Si l'envoi échoue, l'application propose **Ouvrir dans Gmail** puis **Commande envoyée ✓**.
+
+> Si tu modifies le script plus tard : **Déployer → Gérer les déploiements → ✏️ → Version : Nouvelle version → Déployer** (l'URL reste la même).
