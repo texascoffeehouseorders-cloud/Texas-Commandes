@@ -590,7 +590,7 @@ function startSync(){
 function showGate(html){ $("gate").innerHTML=html; $("gate").classList.remove("hidden"); $("app").classList.add("hidden"); }
 function hideGate(){ $("gate").classList.add("hidden"); $("app").classList.remove("hidden"); }
 function loginScreen(err){
-  showGate('<div class="gatebox"><div class="glogo">☕</div><h1>Texas Coffee House</h1><p class="hint" style="text-align:center">'+esc(t("loginTitle"))+'</p>'+
+  showGate('<div class="gatebox"><div class="glogo"><img src="icon-192.png" alt=""></div><h1>Texas Coffee House</h1><p class="hint" style="text-align:center">'+esc(t("loginTitle"))+'</p>'+
     '<form id="loginForm"><div class="field"><label>'+esc(t("email"))+'</label><input id="lEmail" type="email" autocomplete="username" required></div>'+
     '<div class="field"><label>'+esc(t("password"))+'</label><input id="lPass" type="password" autocomplete="current-password" required></div>'+
     '<div class="hint" style="color:var(--red)">'+esc(err||"")+'</div>'+
@@ -612,7 +612,7 @@ async function afterLogin(){
 }
 (async function boot(){
   if(window.__MOCK_DB){ DB=window.__MOCK_DB; S.dbOk=true; hideGate(); renderAll(); startSync(); return; }
-  if(!isConfigured()){ showGate('<div class="gatebox"><div class="glogo">☕</div><h1>Texas Coffee House</h1><p class="notice" style="margin:0">'+esc(t("noConfig"))+'</p></div>'); return; }
+  if(!isConfigured()){ showGate('<div class="gatebox"><div class="glogo"><img src="icon-192.png" alt=""></div><h1>Texas Coffee House</h1><p class="notice" style="margin:0">'+esc(t("noConfig"))+'</p></div>'); return; }
   try{ DB=await initDb(); }catch(e){ console.error(e); showGate('<div class="gatebox"><p class="notice">'+esc(t("noDb"))+'</p></div>'); return; }
   onAuth(function(user){ if(user) afterLogin(); else { synced=false; loginScreen(); } });
 })();

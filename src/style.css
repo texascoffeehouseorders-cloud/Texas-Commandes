@@ -178,3 +178,6 @@ body.editing .tile .edithint{display:block}
 .dseg{flex:0 0 auto!important;gap:6px}
 .dseg button{min-height:40px;padding:4px 14px;flex:0 0 auto}
 .dspacer{flex:1;min-height:20px}
+
+.glogo img{width:96px;height:96px;border-radius:24px;display:block;margin:0 auto}
+.hlogo{width:44px;height:44px;border-radius:12px;flex-shrink:0}
