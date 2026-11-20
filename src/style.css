@@ -161,3 +161,20 @@ body.editing .tile .edithint{display:block}
 .hbtn.icon{width:46px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 
 .tile .fr{font-size:13px;font-weight:700;color:var(--coffee2);margin-top:-4px}
+
+/* ---------- menu latéral ---------- */
+.dov{position:fixed;inset:0;background:rgba(30,18,10,.5);z-index:40;display:flex;justify-content:flex-end}
+.drawer{width:min(360px,88vw);height:100%;background:var(--cream);display:flex;flex-direction:column;padding:calc(14px + env(safe-area-inset-top)) 14px calc(18px + env(safe-area-inset-bottom));box-shadow:-10px 0 30px rgba(0,0,0,.3);animation:slidein .18s ease-out;overflow:auto}
+@keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
+.dhead{display:flex;align-items:center;justify-content:space-between;background:var(--coffee);color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.dtitle{font-size:22px;font-weight:900}
+.dhead .sub{color:#e6cdb3;font-size:13px;font-weight:700}
+.dx{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:26px;font-weight:900;line-height:1}
+.ditem{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-height:60px;font-weight:800;font-size:17px;margin-bottom:10px;color:var(--coffee)}
+.ditem span:first-of-type{flex:1}
+.ditem.static{cursor:default}
+.ditem.danger{color:var(--red);border-color:#f0c4be}
+.ditem .lock{font-size:16px}
+.dseg{flex:0 0 auto!important;gap:6px}
+.dseg button{min-height:40px;padding:4px 14px;flex:0 0 auto}
+.dspacer{flex:1;min-height:20px}

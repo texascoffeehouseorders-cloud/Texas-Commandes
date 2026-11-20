@@ -41,14 +41,14 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
-          cp app/build/outputs/apk/release/app-release.apk ../Inventaire-TexasCoffeeHouse.apk
+          cp app/build/outputs/apk/release/app-release.apk ../Commandes-TexasCoffeeHouse.apk
       - name: Publier l'APK (onglet Releases)
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.${{ github.run_number }}
-          name: Inventaire v1.${{ github.run_number }}
-          body: "Télécharge **Inventaire-TexasCoffeeHouse.apk** sur la tablette ou le téléphone Android, puis ouvre-le pour installer ou mettre à jour."
-          files: Inventaire-TexasCoffeeHouse.apk
+          name: Commandes v1.${{ github.run_number }}
+          body: "Télécharge **Commandes-TexasCoffeeHouse.apk** sur la tablette ou le téléphone Android, puis ouvre-le pour installer ou mettre à jour."
+          files: Commandes-TexasCoffeeHouse.apk
           make_latest: true
 
   web:

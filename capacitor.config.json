@@ -1,6 +1,6 @@
 {
   "appId": "be.texascoffeehouse.inventaire",
-  "appName": "Inventaire",
+  "appName": "Commandes",
   "webDir": "dist",
   "android": { "backgroundColor": "#3b2418" },
   "plugins": {

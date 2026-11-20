@@ -1,6 +1,6 @@
 {
-  "name": "Inventaire – Texas Coffee House",
-  "short_name": "Inventaire",
+  "name": "Commandes – Texas Coffee House",
+  "short_name": "Commandes",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",

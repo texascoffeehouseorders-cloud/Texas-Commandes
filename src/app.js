@@ -5,7 +5,7 @@ import { setupNotifications, scheduleRamautReminders, beep, webNotify, askWebNot
 
 /* ===================== TRADUCTIONS (interface uniquement) ===================== */
 var T = {
- fr:{title:"Inventaire",order:"Commande",history:"Historique",search:"Rechercher un article ou une référence",
+ fr:{title:"Commandes",order:"Commande",history:"Historique",search:"Rechercher un article ou une référence",
   prio:"★ Priorité",cart:"🛒 Dans la commande",all:"Tout",edit:"✏️ Modifier",done:"✓ Terminer",
   editBar:"Mode modification : touche un article pour le modifier ou le supprimer.",addItem:"+ Ajouter un article",
   seeOrder:"Voir la commande",items1:"article",itemsN:"articles",
@@ -22,8 +22,8 @@ var T = {
   emailPh:"adresse e-mail de Ramaut",nameReq:"Le nom est obligatoire.",badNum:"Nombre invalide.",saved:"Enregistré",deleted:"Article supprimé",
   writeErr:"Échec de l'enregistrement. Réessayez.",noRight:"Pas d'autorisation pour modifier.",
   allSup:"Tous",today:"Aujourd'hui",yesterday:"Hier",sent:"Envoyée",sentAt:"envoyée à",nth:"n°",sentDone:"Commande envoyée et enregistrée dans l'historique",alreadyToday:"Déjà {n} commande(s) envoyée(s) aujourd'hui chez {s}. Celle-ci sera un complément (n°{m}).",frozen:"Commande envoyée : elle n'est plus modifiable.",complement:"complément",
-  noHistory:"Aucune commande pour l'instant.",noHistoryDay:"Aucune commande envoyée ce jour-là.",pickDate:"Choisir une date",allDates:"Toutes les dates",logout:"Se déconnecter",autoOn:"✉️ Envoi automatique activé : l'e-mail part de la Gmail du shop en 1 clic.",autoOff:"L'envoi automatique n'est pas encore configuré.",setupAuto:"⚙️ Configurer l'envoi automatique",settingsAuto:"⚙️ Réglages",sendRamaut:"📧 Envoyer à Ramaut",sending:"Envoi en cours…",sentMail:"E-mail envoyé à Ramaut ✓",mailFailed:"L'e-mail n'est pas parti : {e}. Envoie-le avec Gmail, puis touche « Commande envoyée ✓ ».",openGmail:"✉️ Ouvrir dans Gmail",retry:"Réessayer",needEmail:"Indique d'abord l'adresse e-mail de Ramaut.",autoTitle:"Envoi automatique des e-mails",autoHelp:"Colle ici le lien du script Google (« Application Web ») et le code secret. Voir le guide d'installation.",scriptUrl:"Lien du script (https://script.google.com/…/exec)",secret:"Code secret",test:"Envoyer un e-mail de test",testOk:"Test réussi ✓ un e-mail a été envoyé à {m}",testKo:"Échec du test : {e}",badUrl:"Le lien doit commencer par https://script.google.com/",disableAuto:"Désactiver",emailed:"e-mail envoyé",noNet:"pas de connexion Internet ou script injoignable",confirmLogout:"Êtes-vous sûr de vouloir vous déconnecter ? Il faudra ressaisir l'e-mail et le mot de passe du shop pour revenir.",yesLogout:"Oui, me déconnecter",notifOff:"⚠️ Les notifications sont bloquées : les rappels Ramaut ne pourront pas sonner. Active-les dans Réglages Android → Applications → Inventaire → Notifications.",loginTitle:"Connexion du shop",email:"E-mail du compte du shop",password:"Mot de passe",signIn:"Se connecter",badLogin:"E-mail ou mot de passe incorrect.",noConfig:"Configuration Firebase manquante : remplis le fichier src/firebase-config.js (voir le guide d'installation).",seeding:"Premier démarrage : chargement des 215 articles…",removed:"(article supprimé)",orderOf:"Commande du",searchIn:"Résultats chez"},
- en:{title:"Inventory",order:"Order",history:"History",search:"Search an item or a reference",
+  noHistory:"Aucune commande pour l'instant.",noHistoryDay:"Aucune commande envoyée ce jour-là.",pickDate:"Choisir une date",allDates:"Toutes les dates",logout:"Se déconnecter",menu:"Menu",mEdit:"Modifier les articles",mEditOn:"Terminer la modification",mLang:"Langue",mMail:"Réglages de l'e-mail",mVersion:"Commandes · Texas Coffee House",pinTitle:"Réglages protégés",pinAsk:"Mot de passe des réglages",pinCreate:"Choisis un mot de passe pour protéger les réglages de l'e-mail (au moins 4 caractères).",pinConfirm:"Confirme le mot de passe",pinWrong:"Mot de passe incorrect.",pinShort:"Au moins 4 caractères.",pinMismatch:"Les deux mots de passe ne sont pas identiques.",pinChange:"Changer le mot de passe",pinNew:"Nouveau mot de passe",unlock:"Déverrouiller",ramautTo:"Adresse e-mail de Ramaut",noRecipient:"Adresse de Ramaut à renseigner dans ☰ Menu → Réglages de l'e-mail.",mailSettings:"Réglages de l'e-mail",autoOn:"✉️ Envoi automatique activé : l'e-mail part de la Gmail du shop en 1 clic.",autoOff:"L'envoi automatique n'est pas encore configuré.",setupAuto:"⚙️ Configurer l'envoi automatique",settingsAuto:"⚙️ Réglages",sendRamaut:"📧 Envoyer à Ramaut",sending:"Envoi en cours…",sentMail:"E-mail envoyé à Ramaut ✓",mailFailed:"L'e-mail n'est pas parti : {e}. Envoie-le avec Gmail, puis touche « Commande envoyée ✓ ».",openGmail:"✉️ Ouvrir dans Gmail",retry:"Réessayer",needEmail:"Indique d'abord l'adresse e-mail de Ramaut.",autoTitle:"Envoi automatique des e-mails",autoHelp:"Colle ici le lien du script Google (« Application Web ») et le code secret. Voir le guide d'installation.",scriptUrl:"Lien du script (https://script.google.com/…/exec)",secret:"Code secret",test:"Envoyer un e-mail de test",testOk:"Test réussi ✓ un e-mail a été envoyé à {m}",testKo:"Échec du test : {e}",badUrl:"Le lien doit commencer par https://script.google.com/",disableAuto:"Désactiver",emailed:"e-mail envoyé",noNet:"pas de connexion Internet ou script injoignable",confirmLogout:"Êtes-vous sûr de vouloir vous déconnecter ? Il faudra ressaisir l'e-mail et le mot de passe du shop pour revenir.",yesLogout:"Oui, me déconnecter",notifOff:"⚠️ Les notifications sont bloquées : les rappels Ramaut ne pourront pas sonner. Active-les dans Réglages Android → Applications → Commandes → Notifications.",loginTitle:"Connexion du shop",email:"E-mail du compte du shop",password:"Mot de passe",signIn:"Se connecter",badLogin:"E-mail ou mot de passe incorrect.",noConfig:"Configuration Firebase manquante : remplis le fichier src/firebase-config.js (voir le guide d'installation).",seeding:"Premier démarrage : chargement des 215 articles…",removed:"(article supprimé)",orderOf:"Commande du",searchIn:"Résultats chez"},
+ en:{title:"Orders",order:"Order",history:"History",search:"Search an item or a reference",
   prio:"★ Priority",cart:"🛒 In the order",all:"All",edit:"✏️ Edit",done:"✓ Done",
   editBar:"Edit mode: tap an item to edit or delete it.",addItem:"+ Add an item",
   seeOrder:"See the order",items1:"item",itemsN:"items",
@@ -40,7 +40,7 @@ var T = {
   emailPh:"Ramaut e-mail address",nameReq:"Name is required.",badNum:"Invalid number.",saved:"Saved",deleted:"Item deleted",
   writeErr:"Saving failed. Please try again.",noRight:"No permission to make changes.",
   allSup:"All",today:"Today",yesterday:"Yesterday",sent:"Sent",sentAt:"sent at",nth:"#",sentDone:"Order sent and saved in the history",alreadyToday:"{n} order(s) already sent today to {s}. This one will be an extra order (#{m}).",frozen:"Sent order: it can no longer be changed.",complement:"extra",
-  noHistory:"No orders yet.",noHistoryDay:"No order sent on that day.",pickDate:"Pick a date",allDates:"All dates",logout:"Sign out",autoOn:"✉️ Automatic sending is on: the e-mail goes from the shop Gmail in 1 tap.",autoOff:"Automatic sending is not set up yet.",setupAuto:"⚙️ Set up automatic sending",settingsAuto:"⚙️ Settings",sendRamaut:"📧 Send to Ramaut",sending:"Sending…",sentMail:"E-mail sent to Ramaut ✓",mailFailed:"The e-mail was not sent: {e}. Send it with Gmail, then tap “Order sent ✓”.",openGmail:"✉️ Open in Gmail",retry:"Try again",needEmail:"First enter Ramaut's e-mail address.",autoTitle:"Automatic e-mail sending",autoHelp:"Paste the Google script link (“Web app”) and the secret code. See the installation guide.",scriptUrl:"Script link (https://script.google.com/…/exec)",secret:"Secret code",test:"Send a test e-mail",testOk:"Test OK ✓ an e-mail was sent to {m}",testKo:"Test failed: {e}",badUrl:"The link must start with https://script.google.com/",disableAuto:"Turn off",emailed:"e-mail sent",noNet:"no Internet connection or script unreachable",confirmLogout:"Are you sure you want to sign out? You will need the shop e-mail and password to sign back in.",yesLogout:"Yes, sign out",notifOff:"⚠️ Notifications are blocked: Ramaut reminders cannot ring. Turn them on in Android Settings → Apps → Inventaire → Notifications.",loginTitle:"Shop sign-in",email:"Shop account e-mail",password:"Password",signIn:"Sign in",badLogin:"Wrong e-mail or password.",noConfig:"Firebase configuration missing: fill in src/firebase-config.js (see the installation guide).",seeding:"First start: loading the 215 items…",removed:"(deleted item)",orderOf:"Order of",searchIn:"Results at"}
+  noHistory:"No orders yet.",noHistoryDay:"No order sent on that day.",pickDate:"Pick a date",allDates:"All dates",logout:"Sign out",menu:"Menu",mEdit:"Edit items",mEditOn:"Finish editing",mLang:"Language",mMail:"E-mail settings",mVersion:"Orders · Texas Coffee House",pinTitle:"Protected settings",pinAsk:"Settings password",pinCreate:"Choose a password to protect the e-mail settings (at least 4 characters).",pinConfirm:"Confirm the password",pinWrong:"Wrong password.",pinShort:"At least 4 characters.",pinMismatch:"The two passwords do not match.",pinChange:"Change the password",pinNew:"New password",unlock:"Unlock",ramautTo:"Ramaut e-mail address",noRecipient:"Ramaut's address must be set in ☰ Menu → E-mail settings.",mailSettings:"E-mail settings",autoOn:"✉️ Automatic sending is on: the e-mail goes from the shop Gmail in 1 tap.",autoOff:"Automatic sending is not set up yet.",setupAuto:"⚙️ Set up automatic sending",settingsAuto:"⚙️ Settings",sendRamaut:"📧 Send to Ramaut",sending:"Sending…",sentMail:"E-mail sent to Ramaut ✓",mailFailed:"The e-mail was not sent: {e}. Send it with Gmail, then tap “Order sent ✓”.",openGmail:"✉️ Open in Gmail",retry:"Try again",needEmail:"First enter Ramaut's e-mail address.",autoTitle:"Automatic e-mail sending",autoHelp:"Paste the Google script link (“Web app”) and the secret code. See the installation guide.",scriptUrl:"Script link (https://script.google.com/…/exec)",secret:"Secret code",test:"Send a test e-mail",testOk:"Test OK ✓ an e-mail was sent to {m}",testKo:"Test failed: {e}",badUrl:"The link must start with https://script.google.com/",disableAuto:"Turn off",emailed:"e-mail sent",noNet:"no Internet connection or script unreachable",confirmLogout:"Are you sure you want to sign out? You will need the shop e-mail and password to sign back in.",yesLogout:"Yes, sign out",notifOff:"⚠️ Notifications are blocked: Ramaut reminders cannot ring. Turn them on in Android Settings → Apps → Commandes → Notifications.",loginTitle:"Shop sign-in",email:"Shop account e-mail",password:"Password",signIn:"Sign in",badLogin:"Wrong e-mail or password.",noConfig:"Firebase configuration missing: fill in src/firebase-config.js (see the installation guide).",seeding:"First start: loading the 215 items…",removed:"(deleted item)",orderOf:"Order of",searchIn:"Results at"}
 };
 
 /* ===================== ÉTAT ===================== */
@@ -85,11 +85,9 @@ function renderChrome(){
   document.documentElement.lang=S.lang;
   document.body.classList.toggle("editing",S.edit && S.view==="order");
   $("tTitle").textContent=t("title");
-  $("logoutBtn").title=t("logout"); $("logoutBtn").setAttribute("aria-label",t("logout"));
-  $("langBtn").innerHTML = S.lang==="fr" ? "<b>FR</b> / EN" : "FR / <b>EN</b>";
-  $("editBtn").textContent = S.edit ? t("done") : t("edit");
-  $("editBtn").classList.toggle("editon",S.edit);
-  $("editBtn").classList.toggle("hidden",S.view!=="order");
+  $("menuBtn").setAttribute("aria-label",t("menu"));
+  $("editBtn").textContent = t("done");
+  $("editBtn").classList.toggle("hidden",!(S.edit && S.view==="order"));
   $("tabOrder").textContent=t("order"); $("tabHistory").textContent=t("history");
   $("tabOrder").classList.toggle("on",S.view==="order"); $("tabHistory").classList.toggle("on",S.view==="history");
   $("editBox").innerHTML = (S.edit && S.view==="order") ? '<div class="editbar"><span>'+esc(t("editBar"))+'</span></div>' : "";
@@ -378,37 +376,40 @@ function openGmail(to,subject,body){
 }
 function autoSettingsDialog(back){
   var s=S.settings;
-  openDlg('<div class="dlg" role="dialog"><div class="dh">'+esc(t("autoTitle"))+'</div><div class="db">'+
-    '<p class="hint">'+esc(t("autoHelp"))+'</p>'+
+  openDlg('<div class="dlg" role="dialog"><div class="dh">✉️ '+esc(t("mailSettings"))+'</div><div class="db">'+
+    '<div class="field"><label>'+esc(t("ramautTo"))+'</label><input id="sTo" type="email" autocomplete="off" placeholder="'+esc(t("emailPh"))+'" value="'+esc(s.ramautEmail||"")+'"></div>'+
+    '<p class="hint" style="margin-top:18px"><b>'+esc(t("autoTitle"))+'</b><br>'+esc(t("autoHelp"))+'</p>'+
     '<div class="field"><label>'+esc(t("scriptUrl"))+'</label><input id="sUrl" type="url" autocomplete="off" value="'+esc(s.mailUrl||"")+'"></div>'+
     '<div class="field"><label>'+esc(t("secret"))+'</label><input id="sTok" type="text" autocomplete="off" value="'+esc(s.mailToken||"")+'"></div>'+
     '<div id="sMsg" class="hint"></div>'+
     '<button class="btn sec" id="sTest" style="width:100%">'+esc(t("test"))+'</button>'+
+    '<button class="btn sec" id="sPin" style="width:100%;margin-top:10px">🔒 '+esc(t("pinChange"))+'</button>'+
     '</div><div class="df">'+(autoConfigured()?'<button class="btn danger" id="sOff" style="margin-right:auto">'+esc(t("disableAuto"))+'</button>':"")+
     '<button class="btn sec" id="sCancel">'+esc(t("cancel"))+'</button><button class="btn pri" id="sSave">'+esc(t("save"))+'</button></div></div>');
-  function vals(){ return {mailUrl:$("sUrl").value.trim(), mailToken:$("sTok").value.trim()}; }
-  function valid(v){ if(v.mailUrl.indexOf("https://script.google.com/")!==0){ $("sMsg").style.color="var(--red)"; $("sMsg").textContent=t("badUrl"); return false; } return !!v.mailToken; }
+  function vals(){ return {ramautEmail:$("sTo").value.trim(), mailUrl:$("sUrl").value.trim(), mailToken:$("sTok").value.trim()}; }
+  function valid(v){ if(!v.mailUrl && !v.mailToken) return true; if(v.mailUrl.indexOf("https://script.google.com/")!==0){ $("sMsg").style.color="var(--red)"; $("sMsg").textContent=t("badUrl"); return false; } return !!v.mailToken; }
   function save(v){ if(!guardWrite()) return Promise.reject(); return DB.doc("settings/main").set(Object.assign({},S.settings,v)).then(function(){ S.settings=Object.assign({},S.settings,v); }); }
   $("sCancel").onclick=function(){ back?back():closeDlg(); };
-  $("sTest").onclick=function(){ var v=vals(), b=this; if(!valid(v)) return; b.disabled=true; $("sMsg").style.color=""; $("sMsg").textContent=t("sending");
+  $("sPin").onclick=changePinDialog;
+  $("sTest").onclick=function(){ var v=vals(), b=this; if(!valid(v)||!v.mailUrl) return; b.disabled=true; $("sMsg").style.color=""; $("sMsg").textContent=t("sending");
     var old=S.settings; S.settings=Object.assign({},old,v);
     callScript({test:true}).then(function(r){ $("sMsg").style.color="var(--green)"; $("sMsg").textContent=t("testOk").replace("{m}",r.to||""); },
       function(e){ $("sMsg").style.color="var(--red)"; $("sMsg").textContent=t("testKo").replace("{e}",e.message); })
       .then(function(){ S.settings=old; b.disabled=false; }); };
   $("sSave").onclick=function(){ var v=vals(); if(!valid(v)) return; save(v).then(function(){ toast(t("saved")); back?back():closeDlg(); }).catch(function(e){ if(e) handleWriteErr(e); }); };
-  if($("sOff")) $("sOff").onclick=function(){ save({mailUrl:"",mailToken:""}).then(function(){ toast(t("saved")); back?back():closeDlg(); }).catch(function(e){ if(e) handleWriteErr(e); }); };
+  if($("sOff")) $("sOff").onclick=function(){ save({ramautEmail:$("sTo").value.trim(),mailUrl:"",mailToken:""}).then(function(){ toast(t("saved")); back?back():closeDlg(); }).catch(function(e){ if(e) handleWriteErr(e); }); };
 }
 
 function messageDialog(opts){ // {title, sup, subject, msg, live, empty, note, frozen}
   var isR=opts.sup==="ramaut";
   var body = (opts.note?'<div class="tip">'+esc(opts.note)+'</div>':"")+(opts.frozen?'<div class="tip">🔒 '+esc(t("frozen"))+'</div>':"");
-  if(isR) body+='<div class="field"><label>'+esc(t("to"))+'</label>'+(opts.live?'<input id="pTo" type="email" placeholder="'+esc(t("emailPh"))+'" value="'+esc(S.settings.ramautEmail||"")+'">':'<div class="ro">'+esc(opts.to||"—")+'</div>')+'</div>'+
+  if(isR) body+='<div class="field"><label>'+esc(t("to"))+'</label>'+(opts.live?(S.settings.ramautEmail?'<div class="ro">'+esc(S.settings.ramautEmail)+'</div>':'<div class="tip" style="background:#fadad6;color:#9a2a20;margin:0">'+esc(t("noRecipient"))+'</div>'):'<div class="ro">'+esc(opts.to||"—")+'</div>')+'</div>'+
       '<div class="field"><label>'+esc(t("subject"))+'</label><div class="ro">'+esc(opts.subject)+'</div></div>';
   else if(opts.live) body+='<div class="tip">'+esc(t("pasteHint"))+'</div>';
   var foot='<button class="btn sec" data-act="close">'+esc(t("close"))+'</button><button class="btn '+(opts.live?"sec":"pri")+'" id="pCopy">'+esc(isR?t("copy"):t("copyMsg"))+'</button>';
   var auto=isR && opts.live && autoConfigured();
-  if(isR && opts.live) body+='<div class="tip" id="pAuto" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span style="flex:1;min-width:200px">'+esc(auto?t("autoOn"):t("autoOff"))+'</span><button class="btn sec" id="pSetup" style="min-height:44px;padding:8px 14px">'+esc(auto?t("settingsAuto"):t("setupAuto"))+'</button></div><div id="pErr"></div>';
-  if(auto) foot+='<button class="btn ok" id="pAutoSend"'+(opts.empty?" disabled":"")+'>'+esc(t("sendRamaut"))+'</button>';
+  if(isR && opts.live) body+='<div id="pErr"></div>';
+  if(auto) foot+='<button class="btn ok" id="pAutoSend"'+((opts.empty||!S.settings.ramautEmail)?" disabled":"")+'>'+esc(t("sendRamaut"))+'</button>';
   else if(opts.live){
     if(isR) foot+='<button class="btn sec" id="pGmail"'+(opts.empty?" disabled":"")+'>'+esc(t("openGmail"))+'</button>';
     foot+='<button class="btn ok" id="pSent"'+(opts.empty?" disabled":"")+'>'+esc(t("markSent"))+'</button>';
@@ -418,21 +419,17 @@ function messageDialog(opts){ // {title, sup, subject, msg, live, empty, note, f
     '<div class="field"><label>'+esc(t("message"))+'</label><textarea id="pMsg" readonly>'+esc(opts.msg)+'</textarea></div>'+
     '</div><div class="df">'+foot+'</div></div>');
   $("pCopy").onclick=function(){ copyText(isR ? (t("to")+" : "+(opts.live?(S.settings.ramautEmail||""):(opts.to||""))+"\n"+t("subject")+" : "+opts.subject+"\n\n"+opts.msg) : opts.msg, isR?null:$("pMsg")); };
-  if($("pTo")) $("pTo").onchange=function(){ var v=this.value.trim(); if(v===(S.settings.ramautEmail||"")) return; if(!guardWrite()) return;
-      DB.doc("settings/main").set(Object.assign({},S.settings,{ramautEmail:v})).then(function(){toast(t("saved"));}).catch(handleWriteErr); };
   function bindSent(){ if($("pSent")) $("pSent").onclick=function(){ var b=this; b.disabled=true; var r=markSent(opts.sup,opts.subject,opts.msg,false);
       if(r) r.then(function(){ closeDlg(); }, function(){ b.disabled=false; }); else b.disabled=false; }; }
   bindSent();
-  function toAddr(){ return ($("pTo")?$("pTo").value.trim():"")||S.settings.ramautEmail||""; }
+  function toAddr(){ return S.settings.ramautEmail||""; }
   if($("pGmail")) $("pGmail").onclick=function(){ openGmail(toAddr(),opts.subject,opts.msg); };
-  if($("pSetup")) $("pSetup").onclick=function(){ autoSettingsDialog(function(){ previewDialog(); }); };
   if($("pAutoSend")) $("pAutoSend").onclick=function(){
     var b=this, to=toAddr();
-    if(!to){ $("pErr").innerHTML='<div class="tip" style="background:#fadad6;color:#9a2a20">'+esc(t("needEmail"))+'</div>'; if($("pTo")) $("pTo").focus(); return; }
+    if(!to){ $("pErr").innerHTML='<div class="tip" style="background:#fadad6;color:#9a2a20">'+esc(t("noRecipient"))+'</div>'; return; }
     if(!guardWrite()) return;
     b.disabled=true; b.textContent=t("sending"); $("pErr").innerHTML="";
-    var save = (to!==(S.settings.ramautEmail||"")) ? DB.doc("settings/main").set(Object.assign({},S.settings,{ramautEmail:to})).then(function(){ S.settings.ramautEmail=to; }) : Promise.resolve();
-    save.then(function(){ return callScript({to:to,subject:opts.subject,body:opts.msg}); })
+    callScript({to:to,subject:opts.subject,body:opts.msg})
       .then(function(){ var r=markSent(opts.sup,opts.subject,opts.msg,true); return r; })
       .then(function(){ closeDlg(); toast(t("sentMail")); },
         function(e){
@@ -456,6 +453,55 @@ function historyDialog(hid){
   messageDialog({title:supName(h.supplier)+(h.nth>1?" "+t("nth")+h.nth:"")+" · "+dayLabel(h.date)+" · "+hTime(h), sup:h.supplier, subject:h.subject||"", msg:h.msg||"", to:h.to||"", live:false, frozen:true});
 }
 
+/* ---------- Menu latéral ---------- */
+function closeDrawer(){ $("drawerBox").innerHTML=""; }
+function openDrawer(){
+  var ic=function(d){ return '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>'; };
+  $("drawerBox").innerHTML='<div class="dov" data-act="drawerclose"><aside class="drawer" role="dialog" aria-label="'+esc(t("menu"))+'">'+
+    '<div class="dhead"><div><div class="dtitle">'+esc(t("title"))+'</div><div class="sub">Texas Coffee House</div></div><button class="dx" data-act="drawerclose" aria-label="×">×</button></div>'+
+    '<button class="ditem" data-act="dEdit">'+ic('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>')+'<span>'+esc(S.edit?t("mEditOn"):t("mEdit"))+'</span></button>'+
+    '<div class="ditem static">'+ic('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>')+'<span>'+esc(t("mLang"))+'</span>'+
+      '<span class="seg dseg"><button data-act="dLang" data-l="fr" class="'+(S.lang==="fr"?"on":"")+'">FR</button><button data-act="dLang" data-l="en" class="'+(S.lang==="en"?"on":"")+'">EN</button></span></div>'+
+    '<button class="ditem" data-act="dMail">'+ic('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>')+'<span>'+esc(t("mMail"))+'</span><span class="lock">🔒</span></button>'+
+    '<div class="dspacer"></div>'+
+    '<button class="ditem danger" data-act="dLogout">'+ic('<path d="M12 3v9"/><path d="M6.3 6.8a8 8 0 1 0 11.4 0"/>')+'<span>'+esc(t("logout"))+'</span></button>'+
+  '</aside></div>';
+}
+function sha(s){ return crypto.subtle.digest("SHA-256",new TextEncoder().encode("tch:"+s)).then(function(b){ return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0");}).join(""); }); }
+var pinOk=0; // déverrouillé pour 5 minutes sur cet appareil
+function pinGate(next){
+  if(Date.now()-pinOk<300000) return next();
+  var has=!!S.settings.pinHash;
+  openDlg('<div class="dlg sm" role="dialog"><div class="dh">🔒 '+esc(t("pinTitle"))+'</div><div class="db">'+
+    (has?'':'<p class="hint">'+esc(t("pinCreate"))+'</p>')+
+    '<div class="field"><label>'+esc(has?t("pinAsk"):t("pinNew"))+'</label><input id="pin1" type="password" autocomplete="off"></div>'+
+    (has?'':'<div class="field"><label>'+esc(t("pinConfirm"))+'</label><input id="pin2" type="password" autocomplete="off"></div>')+
+    '<div id="pinErr" class="hint" style="color:var(--red)"></div></div>'+
+    '<div class="df"><button class="btn sec" data-act="close">'+esc(t("cancel"))+'</button><button class="btn pri" id="pinOk">'+esc(has?t("unlock"):t("save"))+'</button></div></div>');
+  setTimeout(function(){ $("pin1").focus(); },50);
+  function go(){
+    var a=$("pin1").value;
+    if(has){ sha(a).then(function(h){ if(h===S.settings.pinHash){ pinOk=Date.now(); next(); } else { $("pinErr").textContent=t("pinWrong"); $("pin1").select(); } }); return; }
+    if(a.length<4){ $("pinErr").textContent=t("pinShort"); return; }
+    if(a!==$("pin2").value){ $("pinErr").textContent=t("pinMismatch"); return; }
+    if(!guardWrite()) return;
+    sha(a).then(function(h){ return DB.doc("settings/main").set(Object.assign({},S.settings,{pinHash:h})).then(function(){ S.settings.pinHash=h; pinOk=Date.now(); toast(t("saved")); next(); }); }).catch(handleWriteErr);
+  }
+  $("pinOk").onclick=go;
+  [].forEach.call(document.querySelectorAll("#pin1,#pin2"),function(el){ el.onkeydown=function(e){ if(e.key==="Enter"){ e.preventDefault(); go(); } }; });
+}
+function changePinDialog(){
+  openDlg('<div class="dlg sm" role="dialog"><div class="dh">🔒 '+esc(t("pinChange"))+'</div><div class="db">'+
+    '<div class="field"><label>'+esc(t("pinNew"))+'</label><input id="pin1" type="password" autocomplete="off"></div>'+
+    '<div class="field"><label>'+esc(t("pinConfirm"))+'</label><input id="pin2" type="password" autocomplete="off"></div>'+
+    '<div id="pinErr" class="hint" style="color:var(--red)"></div></div>'+
+    '<div class="df"><button class="btn sec" id="pinBack">'+esc(t("cancel"))+'</button><button class="btn pri" id="pinOk">'+esc(t("save"))+'</button></div></div>');
+  $("pinBack").onclick=function(){ autoSettingsDialog(); };
+  $("pinOk").onclick=function(){ var a=$("pin1").value; if(a.length<4){ $("pinErr").textContent=t("pinShort"); return; } if(a!==$("pin2").value){ $("pinErr").textContent=t("pinMismatch"); return; }
+    if(!guardWrite()) return;
+    sha(a).then(function(h){ return DB.doc("settings/main").set(Object.assign({},S.settings,{pinHash:h})).then(function(){ S.settings.pinHash=h; toast(t("saved")); autoSettingsDialog(); }); }).catch(handleWriteErr); };
+}
+
 function logoutDialog(){
   openDlg('<div class="dlg sm" role="dialog"><div class="dh">'+esc(t("logout"))+'</div><div class="db"><p style="margin:0;font-weight:700">'+esc(t("confirmLogout"))+'</p></div>'+
     '<div class="df"><button class="btn sec" data-act="close">'+esc(t("cancel"))+'</button><button class="btn danger" id="doLogout">'+esc(t("yesLogout"))+'</button></div></div>');
@@ -476,6 +522,12 @@ document.addEventListener("click",function(e){
     case "hsup": S.hSup=el.dataset.s; renderHistory(); break;
     case "hdateclear": setHistoryDate(""); break;
     case "logout": logoutDialog(); break;
+    case "menu": openDrawer(); break;
+    case "drawerclose": if(e.target===el || el.classList.contains("dx")) closeDrawer(); break;
+    case "dEdit": closeDrawer(); S.edit=!S.edit; if(S.edit && S.view!=="order"){ S.view="order"; lsSet("view2","order"); $("main").innerHTML=""; } renderAll(); break;
+    case "dLang": S.lang=el.dataset.l; lsSet("lang",S.lang); renderAll(); openDrawer(); break;
+    case "dMail": closeDrawer(); pinGate(function(){ autoSettingsDialog(); }); break;
+    case "dLogout": closeDrawer(); logoutDialog(); break;
     case "hopen": historyDialog(el.dataset.o); break;
     case "add": itemForm(null); break;
     case "preview": previewDialog(); break;
@@ -491,10 +543,9 @@ document.addEventListener("input",function(e){
 document.addEventListener("click",function(e){
   if(e.target.id==="qClr"){ S.search=""; $("q").value=""; $("qClr").classList.add("hidden"); renderOrderBody(); $("q").focus(); }
 });
-$("editBtn").onclick=function(){ S.edit=!S.edit; renderChrome(); renderBottom(); };
-$("langBtn").onclick=function(){ S.lang=S.lang==="fr"?"en":"fr"; lsSet("lang",S.lang); renderAll(); };
+$("editBtn").onclick=function(){ S.edit=false; renderChrome(); renderBottom(); };
 [].forEach.call(document.querySelectorAll(".tab"),function(b){ b.onclick=function(){ S.view=b.dataset.view; lsSet("view2",S.view); if(S.view!=="order") S.edit=false; $("main").innerHTML=""; renderAll(); window.scrollTo(0,0); }; });
-document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeDlg(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ closeDlg(); closeDrawer(); } });
 function flushAll(){ Object.keys(pendOrd).forEach(function(s){ clearTimeout(ordTimers[s]); flushOrder(s); }); }
 window.addEventListener("beforeunload",flushAll);
 document.addEventListener("visibilitychange",function(){ if(document.hidden) flushAll(); });

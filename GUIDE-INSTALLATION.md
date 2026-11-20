@@ -1,4 +1,4 @@
-# Inventaire – Texas Coffee House · Guide d'installation
+# Commandes – Texas Coffee House · Guide d'installation
 
 Ce projet donne :
 - **une application Android** (fichier `.apk`) pour la tablette Samsung et les téléphones Android ;
@@ -37,9 +37,9 @@ Il faut le faire **une seule fois**, environ 20 minutes.
 ## Étape 3 – Installer sur la tablette et les téléphones Android
 
 1. Sur l'appareil, ouvre `https://github.com/TON-NOM/texas-inventaire/releases/latest` dans Chrome.
-2. Touche **Inventaire-TexasCoffeeHouse.apk** pour le télécharger, puis ouvre-le.
+2. Touche **Commandes-TexasCoffeeHouse.apk** pour le télécharger, puis ouvre-le.
 3. Android demande d'autoriser l'installation depuis Chrome : **Autoriser** → **Installer**.
-4. Ouvre **Inventaire**, connecte-toi avec le compte du shop (une seule fois par appareil).
+4. Ouvre **Commandes**, connecte-toi avec le compte du shop (une seule fois par appareil).
 5. Accepte **les notifications** et **« Alarmes et rappels »** : c'est ce qui fait sonner les rappels Ramaut de 15 h et 15 h 30.
 
 **Mises à jour :** à chaque changement, GitHub refait l'APK. Il suffit de le retélécharger et de l'installer par-dessus (on reste connecté).
@@ -87,8 +87,8 @@ Limite Google : 100 destinataires par jour (largement suffisant).
    - Exécuter en tant que : **Moi**
    - Qui a accès : **Tout le monde**
    → **Déployer** → copie l'**URL de l'application Web** (elle finit par `/exec`).
-7. Dans l'application Inventaire : **Commande → Ramaut → Voir la commande → ⚙️ Configurer l'envoi automatique**
-   → colle l'URL et le code secret → **Envoyer un e-mail de test** (un e-mail arrive dans la Gmail du shop) → **Enregistrer**.
+7. Dans l'application Commandes : **menu ☰ → Réglages de l'e-mail** (mot de passe des réglages)
+   → colle l'URL et le code secret, et l'adresse de Ramaut → **Envoyer un e-mail de test** (un e-mail arrive dans la Gmail du shop) → **Enregistrer**.
 
 Ensuite, le bouton **📧 Envoyer à Ramaut** envoie l'e-mail et enregistre la commande dans l'historique en un seul clic.
 Si l'envoi échoue, l'application propose **Ouvrir dans Gmail** puis **Commande envoyée ✓**.
