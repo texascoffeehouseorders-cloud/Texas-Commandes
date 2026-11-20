@@ -99,4 +99,11 @@ export const MIGRATIONS = [
       return ops;
   } }
 ];
+// v2 — Bananes : par régime (et plus au kilo)
+MIGRATIONS.push({ v:2, apply(items){
+  const ops=[];
+  if (items.i169) ops.push({ type:"update", id:"i169", data:{ unit:"régimes", nameEn:"Bananas (bunches)" } });
+  return ops;
+} });
+
 export const LATEST = MIGRATIONS[MIGRATIONS.length - 1].v;

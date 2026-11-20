@@ -2,8 +2,8 @@
   "appId": "be.texascoffeehouse.inventaire",
   "appName": "Commandes",
   "webDir": "dist",
-  "android": { "backgroundColor": "#3b2418" },
+  "android": { "backgroundColor": "#002668" },
   "plugins": {
-    "LocalNotifications": { "smallIcon": "ic_stat_notify", "iconColor": "#d9822b" }
+    "LocalNotifications": { "smallIcon": "ic_stat_notify", "iconColor": "#be0a2e" }
   }
 }

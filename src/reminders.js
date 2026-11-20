@@ -38,7 +38,7 @@ export async function setupNotifications(){
   if(perm.display !== "granted") perm = await ln.requestPermissions();
   try{
     await ln.createChannel({ id:"ramaut", name:"Rappels Ramaut", description:"Rappels de commande Ramaut (15 h et 15 h 30)",
-      importance:5, visibility:1, vibration:true, lights:true, lightColor:"#d9822b" });
+      importance:5, visibility:1, vibration:true, lights:true, lightColor:"#be0a2e" });
   }catch(e){}
   try{
     if(ln.checkExactNotificationSetting){

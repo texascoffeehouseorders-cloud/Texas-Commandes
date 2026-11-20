@@ -111,6 +111,7 @@ function renderBottom(){
   if(S.view!=="order"){ bb.innerHTML=""; return; }
   if(S.edit){ bb.innerHTML='<button class="bigbtn add" data-act="add">'+esc(t("addItem"))+'</button>'; return; }
   var n=currentLines(S.sup).length;
+  if(!n){ bb.innerHTML=""; return; }   // affiché seulement quand la commande contient des articles
   bb.innerHTML='<button class="bigbtn" data-act="preview"><span>'+esc(t("seeOrder"))+'<span class="bsup"> · '+esc(supName(S.sup))+'</span></span><span>'+esc(nItems(n))+' →</span></button>';
 }
 

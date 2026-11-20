@@ -15,7 +15,7 @@ var SUPPLIERS = [
  ["sirops","Sirops, thés et poudres","Syrups, teas and powders"],["emballages","Emballages","Packaging"]
 ];
 var UNITS = [["pcs","pcs"],["kg","kg"],["packs","packs"],["paquets","packs"],["bouteilles","bottles"],["barquettes","punnets"],
- ["caisses","crates"],["bottes","bunches"],["boîtes","boxes"],["pots","jars"],["sachets","bags"],["cartons","cartons"],["pièces","pieces"]];
+ ["caisses","crates"],["bottes","bunches"],["boîtes","boxes"],["pots","jars"],["sachets","bags"],["cartons","cartons"],["pièces","pieces"],["régimes","bunches"]];
 var RAMAUT_CLIENT = "C07189";
 
 /* ===================== OUTILS ===================== */
