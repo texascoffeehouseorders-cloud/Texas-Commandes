@@ -159,3 +159,5 @@ body.editing .tile .edithint{display:block}
 .hdate .cat{width:auto!important;border-radius:999px!important}
 
 .hbtn.icon{width:46px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+
+.tile .fr{font-size:13px;font-weight:700;color:var(--coffee2);margin-top:-4px}

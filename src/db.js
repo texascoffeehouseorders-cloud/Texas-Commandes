@@ -3,6 +3,7 @@
    pour rester indépendante de Firebase. */
 import { firebaseConfig } from "./firebase-config.js";
 import seed from "./seed.json";
+import { MIGRATIONS } from "./migrations.js";
 
 export function isConfigured(){ return !!(firebaseConfig && firebaseConfig.apiKey && firebaseConfig.projectId); }
 
@@ -88,6 +89,36 @@ export async function seedIfEmpty(){
   seed.forEach((it) => { const { id, ...data } = it; batch.set(fs.doc(firestore, "items/" + id), data); });
   await batch.commit();
   return true;
+}
+
+/* ---------- Mises à jour des articles (une seule fois pour toute la base) ---------- */
+export async function runMigrations(){
+  const { fs, firestore } = fb;
+  const ref = fs.doc(firestore, "meta/migrations");
+  for (const m of MIGRATIONS){
+    const claimed = await fs.runTransaction(firestore, async (tx) => {
+      const s = await tx.get(ref); const d = s.exists() ? s.data() : {};
+      if ((d.v || 0) >= m.v) return false;
+      if (d.running === m.v && Date.now() - (d.at || 0) < 120000) return false; // un autre appareil s'en occupe
+      tx.set(ref, { v: d.v || 0, running: m.v, at: Date.now() });
+      return true;
+    });
+    if (!claimed) continue;
+    const snap = await fs.getDocs(fs.collection(firestore, "items"));
+    const items = {}; snap.forEach(d => { items[d.id] = d.data(); });
+    const ops = m.apply(items);
+    for (let i = 0; i < ops.length; i += 400){
+      const batch = fs.writeBatch(firestore);
+      ops.slice(i, i + 400).forEach(o => {
+        const r = fs.doc(firestore, "items/" + o.id);
+        if (o.type === "delete") batch.delete(r);
+        else if (o.type === "set") batch.set(r, o.data);
+        else batch.set(r, o.data, { merge: true });
+      });
+      await batch.commit();
+    }
+    await fs.setDoc(ref, { v: m.v, at: Date.now() });
+  }
 }
 
 export async function initDb(){ await loadFirebase(); return makeDb(); }

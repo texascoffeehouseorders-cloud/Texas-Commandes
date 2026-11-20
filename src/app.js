@@ -1,6 +1,6 @@
 import "./style.css";
 import { CATS,SUPPLIERS,UNITS,norm,fmtNum,parseNum,catIndex,bxParts,pad,dayKey,dayNum,sortItems,orderSubject,orderMessage,ramautBanner } from "./core.js";
-import { isConfigured, initDb, onAuth, login, logout, seedIfEmpty } from "./db.js";
+import { isConfigured, initDb, onAuth, login, logout, seedIfEmpty, runMigrations } from "./db.js";
 import { setupNotifications, scheduleRamautReminders, beep, webNotify, askWebNotificationPermission, isNative } from "./reminders.js";
 
 /* ===================== TRADUCTIONS (interface uniquement) ===================== */
@@ -13,7 +13,7 @@ var T = {
   copyMsg:"Copier le message",pasteHint:"Copie le message et colle-le dans WhatsApp ou SMS",
   copied:"Copié !",orderQty:"Quantité à commander",ok:"OK",cancel:"Annuler",
   save:"Enregistrer",del:"Supprimer",confirmDel:"Supprimer définitivement cet article ? Cette action est irréversible.",yesDel:"Oui, supprimer",
-  newItem:"Nouvel article",editItem:"Modifier l'article",fName:"Nom (avec la marque)",fOrderName:"Nom de commande (facultatif — sinon le nom est utilisé)",
+  newItem:"Nouvel article",editItem:"Modifier l'article",fName:"Nom en français (avec la marque)",fNameEn:"Nom en anglais (affiché en mode EN)",fOrderName:"Nom de commande (facultatif — sinon le nom est utilisé)",
   fCat:"Catégorie",fSup:"Fournisseur",fUnit:"Unité",fStep:"Pas d'incrément",fNote:"Note (référence Ramaut, précisions)",
   fPrio:"Prioritaire",emptyOrder:"Aucun article dans la commande.",noItems:"Aucun article ici.",noMatch:"Aucun article ne correspond.",
   loading:"Chargement des données partagées…",slow:"Connexion lente : les données ne sont pas encore à jour.",
@@ -31,7 +31,7 @@ var T = {
   copyMsg:"Copy the message",pasteHint:"Copy the message and paste it into WhatsApp or SMS",
   copied:"Copied!",orderQty:"Quantity to order",ok:"OK",cancel:"Cancel",
   save:"Save",del:"Delete",confirmDel:"Delete this item permanently? This cannot be undone.",yesDel:"Yes, delete",
-  newItem:"New item",editItem:"Edit item",fName:"Name (with brand)",fOrderName:"Order name (optional — otherwise the name is used)",
+  newItem:"New item",editItem:"Edit item",fName:"French name (with brand)",fNameEn:"English name (shown in EN mode)",fOrderName:"Order name (optional — otherwise the name is used)",
   fCat:"Category",fSup:"Supplier",fUnit:"Unit",fStep:"Increment step",fNote:"Note (Ramaut reference, details)",
   fPrio:"Priority",emptyOrder:"No items in the order.",noItems:"No items here.",noMatch:"No matching items.",
   loading:"Loading shared data…",slow:"Slow connection: data may not be up to date yet.",
@@ -62,6 +62,7 @@ function supName(id){ for(var i=0;i<SUPPLIERS.length;i++) if(SUPPLIERS[i][0]===i
 function unitName(u){ if(S.lang!=="en") return u; for(var i=0;i<UNITS.length;i++) if(UNITS[i][0]===u) return UNITS[i][1]; return u; }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); }
 function $(id){ return document.getElementById(id); }
+function label(it){ return (S.lang==="en" && it.nameEn) ? it.nameEn : it.name; }
 function nItems(n){ return n+" "+(n===1?t("items1"):t("itemsN")); }
 
 function draft(sup){ return S.drafts[sup]; }
@@ -168,11 +169,12 @@ function renderOrderBody(){
     (list.length ? '<div class="grid">'+list.map(tileHtml).join("")+'</div>'
                  : '<div class="empty">'+esc(searching?t("noMatch"):cur==="_cart"?t("emptyOrder"):t("noItems"))+'</div>');
 }
-function matches(it,q){ var n=norm(q.trim()); return norm(it.name).indexOf(n)>=0 || norm(it.orderName).indexOf(n)>=0 || norm(it.note).indexOf(n)>=0; }
+function matches(it,q){ var n=norm(q.trim()); return norm(it.name).indexOf(n)>=0 || norm(it.nameEn).indexOf(n)>=0 || norm(it.orderName).indexOf(n)>=0 || norm(it.note).indexOf(n)>=0; }
 function tileHtml(it){
   var q=orderQty(S.sup,it.id);
   return '<div class="tile'+(q>0?" in":"")+'" data-id="'+esc(it.id)+'" data-act="tile">'+
-    '<div class="nm">'+(it.prio?'<span class="st">★</span>':"")+esc(it.name)+'</div>'+
+    '<div class="nm">'+(it.prio?'<span class="st">★</span>':"")+esc(label(it))+'</div>'+
+    ((S.lang==="en" && it.nameEn)?'<div class="fr">🇫🇷 '+esc(it.name)+'</div>':"")+
     '<div class="note">'+esc(it.note||"")+'</div>'+
     '<div class="edithint">✏️ '+esc(t("editItem"))+'</div>'+
     '<div class="ctrl"><button class="qb" data-act="dec" aria-label="−">−</button>'+
@@ -218,7 +220,7 @@ function renderHistory(){
   var lastDay=null;
   list.forEach(function(h){
     if(!S.hDate && h.date!==lastDay){ html+='<div class="hday">'+esc(dayLabel(h.date))+'</div>'; lastDay=h.date; }
-    var ls=h.lines||[], sumTxt=ls.slice(0,4).map(function(l){ return l.n+" x"+fmtNum(l.q); }).join(" · ")+(ls.length>4?" …":"");
+    var ls=h.lines||[], sumTxt=ls.slice(0,4).map(function(l){ return ((S.lang==="en"&&l.en)?l.en:l.n)+" x"+fmtNum(l.q); }).join(" · ")+(ls.length>4?" …":"");
     html+='<button class="hcard" data-act="hopen" data-o="'+esc(h._id)+'"><div class="grow"><div class="who">'+esc(supName(h.supplier))+(h.nth>1?' · '+esc(t("nth"))+h.nth:"")+' · '+esc(nItems(ls.length))+'</div><div class="sum">'+esc(sumTxt)+'</div></div>'+
       '<span class="tag sent">✓ '+esc(t("sentAt"))+' '+hTime(h)+'</span></button>';
   });
@@ -275,7 +277,7 @@ function markSent(sup,subject,msg){
     sentLines={}; lines.forEach(function(l){ sentLines[l.it.id]=l.q; });
     var nth=sentToday(sup).length+1, now=Date.now();
     var doc={ supplier:sup, date:S.today, sentAt:now, nth:nth, subject: sup==="ramaut"?subject:"", to: sup==="ramaut"?(S.settings.ramautEmail||""):"", msg:msg,
-      lines: lines.map(function(l){ return {id:l.it.id, n:((l.it.orderName&&String(l.it.orderName).trim())||l.it.name), name:l.it.name, q:l.q, u:l.it.unit||"pcs"}; }) };
+      lines: lines.map(function(l){ return {id:l.it.id, n:((l.it.orderName&&String(l.it.orderName).trim())||l.it.name), name:l.it.name, en:l.it.nameEn||"", q:l.q, u:l.it.unit||"pcs"}; }) };
     return DB.collection("history").doc(sup+"_"+S.today+"_"+now.toString(36)).set(doc);
   }).then(function(){
     // vider la commande en cours (on garde seulement ce qui aurait été ajouté entre-temps)
@@ -293,7 +295,7 @@ function qtyDialog(id){
   var it=S.items[id]; if(!it) return;
   var cur=orderQty(S.sup,id);
   openDlg('<div class="dlg sm" role="dialog"><div class="dh">'+esc(t("orderQty"))+'</div><div class="db">'+
-    '<p class="hint"><b>'+esc(it.name)+'</b></p>'+
+    '<p class="hint"><b>'+esc(label(it))+'</b>'+((S.lang==="en"&&it.nameEn)?'<br>🇫🇷 '+esc(it.name):"")+'</p>'+
     '<input class="bigin" id="qIn" type="text" inputmode="decimal" autocomplete="off" value="'+(cur?fmtNum(cur):"")+'">'+
     '<p class="hint" style="text-align:center;margin-top:8px">'+esc(unitName(it.unit))+'</p>'+
     '<div id="qErr" class="hint" style="color:var(--red)"></div>'+
@@ -316,6 +318,7 @@ function itemForm(id){
   openDlg('<div class="dlg" role="dialog"><div class="dh">'+esc(it?t("editItem"):t("newItem"))+'</div><div class="db">'+
     '<div class="field"><label>'+esc(t("fSup"))+'</label><div class="seg" id="fSup">'+supOpts+'</div></div>'+
     '<div class="field"><label>'+esc(t("fName"))+'</label><input id="fName" value="'+esc(it?it.name:"")+'" autocomplete="off"></div>'+
+    '<div class="field"><label>'+esc(t("fNameEn"))+'</label><input id="fNameEn" value="'+esc(it?it.nameEn:"")+'" autocomplete="off"></div>'+
     '<div class="field"><label>'+esc(t("fOrderName"))+'</label><input id="fOrder" value="'+esc(it?it.orderName:"")+'" autocomplete="off"></div>'+
     '<div class="field"><label>'+esc(t("fNote"))+'</label><input id="fNote" value="'+esc(it?it.note:"")+'" autocomplete="off"></div>'+
     '<div class="row2"><div class="field"><label>'+esc(t("fCat"))+'</label><select id="fCat">'+catOpts+'</select></div>'+
@@ -335,7 +338,7 @@ function itemForm(id){
   $("fSave").onclick=function(){
     if(!guardWrite()) return;
     var name=$("fName").value.trim(); if(!name){ $("fErr").textContent=t("nameReq"); return; }
-    var data={ name:name, orderName:$("fOrder").value.trim(), cat:$("fCat").value, supplier:segVal($("fSup"),defSup), unit:$("fUnit").value,
+    var data={ name:name, nameEn:$("fNameEn").value.trim(), orderName:$("fOrder").value.trim(), cat:$("fCat").value, supplier:segVal($("fSup"),defSup), unit:$("fUnit").value,
       step:Number(segVal($("fStep"),1)), note:$("fNote").value.trim(), prio:$("fPrio").checked };
     var btn=this; btn.disabled=true; var p;
     if(it){ p=DB.doc("items/"+id).update(data); } // update : ne touche jamais aux autres champs
@@ -488,6 +491,7 @@ async function afterLogin(){
   hideGate(); renderAll();
   if(synced) return; synced=true;
   try{ S.dbOk=true; await seedIfEmpty(); }catch(e){ console.error(e); }
+  try{ await runMigrations(); }catch(e){ console.error(e); }
   startSync();
   setupNotifications().then(function(r){ if(r.native){ S.notifOk=r.granted; renderNotice(); } }).catch(function(){});
   askWebNotificationPermission();
